@@ -11,6 +11,6 @@ namespace UtnNoticias
         public string Consulta { get; set; }
         public DateTime FechaConsulta { get; set; }
 
-
+        
     }
 }

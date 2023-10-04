@@ -8,14 +8,15 @@ namespace UtnNoticias
 {
     internal class Noticia
     {
-        public string Tema {  get; set; }
-        public string Autor {  get; set; }
-        public string Titulo {  get; set; }
+        public string Tema { get; set; }
+        public string Autor { get; set; }
+        public string Titulo { get; set; }
         public string Link { get; set; }
         public string Descripcion { get; set; }
         public DateOnly FechaPublicacion { get; set; }
-        public string Contenido {  get; set; }  
-        public DateTime fechaLectura { get; set; }  
+        public string Contenido { get; set; }
+        public DateTime fechaLectura { get; set; } 
+        public string LinkImagen {  get; set; } 
 
     }
 }

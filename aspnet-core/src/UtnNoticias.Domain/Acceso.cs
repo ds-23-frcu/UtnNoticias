@@ -7,11 +7,10 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace UtnNoticias
 {
-	public class ErrorAcceso : AuditedAggregateRoot<Guid>
+	public class Acceso : AuditedAggregateRoot<Guid>
 	{
-		public EstadoError estado { get; set; }
-		public string codigo { get; set; }
-		public string mensaje { get; set; }
-
+		public DateTime FechaInicio { get; set; }
+		public DateTime FechaFinal { get; set; }
+		public ErrorAcceso Error { get; set; }
 	}
 }

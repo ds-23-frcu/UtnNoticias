@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace UtnNoticias
 {
-    enum EstadoAlerta
-    {
-        Activo,Inactivo
-    }
+	public enum EstadoAlerta
+	{
+		Activo, Inactivo
+	}
 }

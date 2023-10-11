@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace UtnNoticias
 {
-    enum EstadoError
-    {
-        Ok, Error
-    }
+	public enum EstadoError
+	{
+		Ok, Error
+	}
 }

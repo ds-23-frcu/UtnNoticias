@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace UtnNoticias
 {
-    enum TipoLenguaje {
-    ingles,
-    español
-    }
+	public enum TipoLenguaje
+	{
+		ingles,
+		español
+	}
 }

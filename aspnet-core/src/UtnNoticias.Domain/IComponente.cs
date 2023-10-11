@@ -7,7 +7,7 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace UtnNoticias
 {
-	public interface Componente
+	public interface IComponente
 	{
 	}
 }

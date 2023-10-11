@@ -7,10 +7,10 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace UtnNoticias
 {
-	public class ListaContenedor : AuditedAggregateRoot<Guid>, Componente
+	public class ListaContenedor : AuditedAggregateRoot<Guid>, IComponente
 	{
 		public string Nombre { get; set; }
-		public List<Componente> Componentes { get; set; }
+		public List<IComponente> Componentes { get; set; }
 
 	}
 }

@@ -7,7 +7,7 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace UtnNoticias
 {
-	public class Noticia : AuditedAggregateRoot<Guid>, Componente
+	public class Noticia : AuditedAggregateRoot<Guid>, IComponente
 	{
 		public string Tema { get; set; }
 		public string Autor { get; set; }

@@ -12,7 +12,6 @@ namespace UtnNoticias
 		public int IdUsuario { get; set; }
 		public string Nombre { get; set; }
 		public string Apellido { get; set; }
-/* corre chupa verga */
 		public TipoLenguaje Lenguaje { get; set; }
 	}
 }

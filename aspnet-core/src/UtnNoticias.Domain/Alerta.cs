@@ -9,11 +9,11 @@ namespace UtnNoticias
 {
 	public class Alerta : AuditedAggregateRoot<Guid>
 	{
-		public string Tema { get; set; }
+		public string Tema { get; set; }	
 		public EstadoAlerta Estado { get; set; }
 		public Busqueda busqueda { get; set; }
 		public ListaContenedor listacontenedor { get; set; }
-
+		
 
 	}
 }

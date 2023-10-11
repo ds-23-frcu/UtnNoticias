@@ -11,7 +11,7 @@ namespace UtnNoticias
 	{
 		public string Nombre { get; set; }
 		public List<Componente> Componentes { get; set; }
-
+			
 
 	}
 }

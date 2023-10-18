@@ -58,7 +58,7 @@ public class UtnNoticiasDbContext :
 	public DbSet<Busqueda> Busquedas { get; set; }
 	public DbSet<ErrorAcceso> ErrorAccesos { get; set; }
 
-	public DbSet<ListaContenedor> ListaContenedors { get; set; }
+	public DbSet<ListaContenedor> ListaContenedores { get; set; }
 	public DbSet<Noticia> Noticias { get; set; }
 	public DbSet<PanelMonitoreo> PanelMonitoreos { get; set; }
 	public DbSet<RegistroUsuario> RegistroUsuarios { get; set; }

@@ -8,7 +8,7 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace UtnNoticias
 {
-	public class IComponente 
+	public class IComponente : AuditedAggregateRoot<Guid>
 	{
 	}
 }

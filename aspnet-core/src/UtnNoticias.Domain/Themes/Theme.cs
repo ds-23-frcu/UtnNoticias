@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Identity;
 
-namespace NewsApp.Themes
+namespace UtnNoticias.Themes
 {
-    public class Theme : Entity<int>
-    {
-        public string Name  { get; set; }
-        public IdentityUser User { get; set; }
-    }
+	public class Theme : Entity<int>
+	{
+		public string Name { get; set; }
+		public IdentityUser User { get; set; }
+	}
 }

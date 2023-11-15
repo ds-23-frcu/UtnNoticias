@@ -10,19 +10,19 @@ using Volo.Abp.TenantManagement;
 namespace UtnNoticias;
 
 [DependsOn(
-    typeof(UtnNoticiasDomainSharedModule),
-    typeof(AbpAccountApplicationContractsModule),
-    typeof(AbpFeatureManagementApplicationContractsModule),
-    typeof(AbpIdentityApplicationContractsModule),
-    typeof(AbpPermissionManagementApplicationContractsModule),
-    typeof(AbpSettingManagementApplicationContractsModule),
-    typeof(AbpTenantManagementApplicationContractsModule),
-    typeof(AbpObjectExtendingModule)
+	typeof(UtnNoticiasDomainSharedModule),
+	typeof(AbpAccountApplicationContractsModule),
+	typeof(AbpFeatureManagementApplicationContractsModule),
+	typeof(AbpIdentityApplicationContractsModule),
+	typeof(AbpPermissionManagementApplicationContractsModule),
+	typeof(AbpSettingManagementApplicationContractsModule),
+	typeof(AbpTenantManagementApplicationContractsModule),
+	typeof(AbpObjectExtendingModule)
 )]
 public class UtnNoticiasApplicationContractsModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
-    {
-        UtnNoticiasDtoExtensions.Configure();
-    }
+	public override void PreConfigureServices(ServiceConfigurationContext context)
+	{
+		UtnNoticiasDtoExtensions.Configure();
+	}
 }

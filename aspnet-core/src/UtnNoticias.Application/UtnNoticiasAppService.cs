@@ -10,8 +10,8 @@ namespace UtnNoticias;
  */
 public abstract class UtnNoticiasAppService : ApplicationService
 {
-    protected UtnNoticiasAppService()
-    {
-        LocalizationResource = typeof(UtnNoticiasResource);
-    }
+	protected UtnNoticiasAppService()
+	{
+		LocalizationResource = typeof(UtnNoticiasResource);
+	}
 }

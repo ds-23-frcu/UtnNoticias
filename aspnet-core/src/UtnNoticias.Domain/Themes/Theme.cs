@@ -12,5 +12,11 @@ namespace UtnNoticias.Themes
 	{
 		public string Name { get; set; }
 		public IdentityUser User { get; set; }
+		public ICollection<Theme> Themes { get; set; }
+
+		public Theme()
+		{
+			this.Themes = new List<Theme>();
+		}
 	}
 }

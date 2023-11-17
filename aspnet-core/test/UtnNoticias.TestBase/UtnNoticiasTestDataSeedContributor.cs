@@ -22,10 +22,9 @@ public class UtnNoticiasTestDataSeedContributor : IDataSeedContributor, ITransie
 
 	public async Task SeedAsync(DataSeedContext context)
 	{
-		// Add users
-		IdentityUser identityUser1 = new IdentityUser(Guid.NewGuid(), "test_user1", "testuser1@email.com");
+
+		IdentityUser identityUser1 = new IdentityUser(Guid.Parse("2e701e62-0953-4dd3-910b-dc6cc93ccb0d"), "admin", "admin@abp.io");
 		await _identityUserManager.CreateAsync(identityUser1, "1q2w3E*");
-		await _identityUserManager.AddToRoleAsync(identityUser1, "Admin");
 
 		await _themeRepository.InsertAsync(new Theme { Name = "Primer tema", User = identityUser1 });
 

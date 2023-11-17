@@ -14,6 +14,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Theme\ThemeManager_Integration_Tests.cs" />
+  </ItemGroup>
+
+   <ItemGroup>
+    <Folder Include="Theme\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
   </ItemGroup>
 

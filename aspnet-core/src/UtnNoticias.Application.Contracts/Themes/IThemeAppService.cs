@@ -12,5 +12,7 @@ namespace UtnNoticias.Themes
 		Task<ICollection<ThemeDto>> GetThemesAsync();
 
 		Task<ThemeDto> GetThemesAsync(int id);
+
+		Task<ThemeDto> CreateAsync(CretateThemeDto input);
 	}
 }

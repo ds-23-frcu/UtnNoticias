@@ -13,6 +13,7 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using UtnNoticias.Themes;
 
 namespace UtnNoticias.EntityFrameworkCore;
 
@@ -63,6 +64,8 @@ public class UtnNoticiasDbContext :
 	public DbSet<PanelMonitoreo> PanelMonitoreos { get; set; }
 	public DbSet<RegistroUsuario> RegistroUsuarios { get; set; }
 	public DbSet<Usuario> Usuarios { get; set; }
+
+	public DbSet<Theme> Themes { get; set; }
 
 	#endregion
 

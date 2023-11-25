@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UtnNoticias.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace UtnNoticias.Migrations
 {
     [DbContext(typeof(UtnNoticiasDbContext))]
-    partial class UtnNoticiasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231124214902_ab")]
+    partial class ab
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -366,8 +369,7 @@ namespace UtnNoticias.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ThemeId")
                         .HasColumnType("int");
@@ -381,7 +383,7 @@ namespace UtnNoticias.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AppThemes", (string)null);
+                    b.ToTable("Themes");
                 });
 
             modelBuilder.Entity("UtnNoticias.Usuario", b =>

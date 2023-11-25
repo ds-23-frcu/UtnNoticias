@@ -14,6 +14,7 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using UtnNoticias.Themes;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 
 namespace UtnNoticias.EntityFrameworkCore;
 
@@ -98,5 +99,13 @@ public class UtnNoticiasDbContext :
 		//    b.ConfigureByConvention(); //auto configure for the base class props
 		//    //...
 		//});
+
+		// Entidad Theme
+		builder.Entity<Theme>(b =>
+		{
+			b.ToTable(UtnNoticiasConsts.DbTablePrefix + "Themes", UtnNoticiasConsts.DbSchema);
+			b.ConfigureByConvention();
+			b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+		});
 	}
 }

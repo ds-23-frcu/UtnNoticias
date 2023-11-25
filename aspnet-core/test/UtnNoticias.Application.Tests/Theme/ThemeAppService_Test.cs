@@ -1,21 +1,22 @@
-﻿using UtnNoticias.Theme;
-using UtnNoticias.EntityFrameworkCore;
+﻿using UtnNoticias.EntityFrameworkCore;
+using UtnNoticias.Themes;
 using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xunit;
-using UtnNoticias.Themes;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Uow;
+using Xunit;
 
 namespace UtnNoticias.Theme
 {
 	public class ThemeAppService_Test : UtnNoticiasApplicationTestBase
 	{
 		private readonly IThemeAppService _themeAppService;
+		private readonly IDbContextProvider<UtnNoticiasDbContext> _dbContextProvider;
+		private readonly IUnitOfWorkManager _unitOfWorkManager;
 
 		public ThemeAppService_Test()
 		{

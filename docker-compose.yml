@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: utnnoticias
+      POSTGRES_PASSWORD: utnnoticias
+      POSTGRES_DB: UtnNoticias
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: ./aspnet-core/src/UtnNoticias
+      dockerfile: Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__Default: Host=db;Port=5432;Database=UtnNoticias;Username=utnnoticias;Password=utnnoticias
+    depends_on:
+      - db
+    ports:
+      - "5000:80"
+
+  angular:
+    build:
+      context: ./angular
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+
+volumes:
+  db_data:

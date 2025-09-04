@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [ master, main, feat/** ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: utnnoticias
+          POSTGRES_PASSWORD: utnnoticias
+          POSTGRES_DB: UtnNoticias
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U utnnoticias" --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Restore backend dependencies
+        run: |
+          cd aspnet-core
+          dotnet restore
+
+      - name: Restore frontend dependencies
+        run: |
+          cd angular
+          npm install
+
+      - name: Build backend
+        run: |
+          cd aspnet-core
+          dotnet build --no-restore --configuration Release
+
+      - name: Run backend tests
+        run: |
+          cd aspnet-core
+          dotnet test --no-restore --no-build --configuration Release
+
+      - name: Build frontend
+        run: |
+          cd angular
+          npm run build -- --prod

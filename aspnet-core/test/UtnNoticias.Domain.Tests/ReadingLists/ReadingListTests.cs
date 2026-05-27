@@ -8,22 +8,22 @@ namespace UtnNoticias.ReadingLists;
 public class ReadingListTests
 {
 	[Fact]
-	public void Should_Not_Create_List_With_Empty_Name()
+	public void Debe_Rechazar_Creacion_Con_Nombre_Vacio()
 	{
-		var exception = Should.Throw<BusinessException>(() =>
+		var excepcion = Should.Throw<BusinessException>(() =>
 			new ReadingList(Guid.NewGuid(), Guid.NewGuid(), " ")
 		);
 
-		exception.Code.ShouldBe(UtnNoticiasDomainErrorCodes.ReadingListNameIsRequired);
+		excepcion.Code.ShouldBe(UtnNoticiasDomainErrorCodes.ReadingListNameIsRequired);
 	}
 
 	[Fact]
-	public void Should_Not_Add_Duplicated_Item_Url()
+	public void Debe_Rechazar_Item_Duplicado_Por_Url()
 	{
-		var list = new ReadingList(Guid.NewGuid(), Guid.NewGuid(), "Lecturas");
-		list.AddItem(
-			"title-1",
-			"https://news.example/item-1",
+		var lista = new ReadingList(Guid.NewGuid(), Guid.NewGuid(), "Lecturas");
+		lista.AddItem(
+			"titulo-1",
+			"https://news.example/noticia-1",
 			null,
 			null,
 			null,
@@ -31,10 +31,10 @@ public class ReadingListTests
 			null
 		);
 
-		var exception = Should.Throw<BusinessException>(() =>
-			list.AddItem(
-				"title-2",
-				" https://news.example/item-1 ",
+		var excepcion = Should.Throw<BusinessException>(() =>
+			lista.AddItem(
+				"titulo-2",
+				" https://news.example/noticia-1 ",
 				null,
 				null,
 				null,
@@ -43,7 +43,6 @@ public class ReadingListTests
 			)
 		);
 
-		exception.Code.ShouldBe(UtnNoticiasDomainErrorCodes.ReadingListItemAlreadyExists);
+		excepcion.Code.ShouldBe(UtnNoticiasDomainErrorCodes.ReadingListItemAlreadyExists);
 	}
 }
-

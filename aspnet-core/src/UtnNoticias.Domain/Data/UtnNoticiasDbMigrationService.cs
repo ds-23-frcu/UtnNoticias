@@ -65,9 +65,10 @@ public class UtnNoticiasDbMigrationService : ITransientDependency
                 {
                     var tenantConnectionStrings = tenant.ConnectionStrings
                         .Select(x => x.Value)
+                        .Where(x => !string.IsNullOrWhiteSpace(x))
                         .ToList();
 
-                    if (!migratedDatabaseSchemas.IsSupersetOf(tenantConnectionStrings))
+                    if (tenantConnectionStrings.Any() && !migratedDatabaseSchemas.IsSupersetOf(tenantConnectionStrings))
                     {
                         await MigrateDatabaseSchemaAsync(tenant);
 

@@ -25,9 +25,33 @@ public class UtnNoticiasDbContextFactory : IDesignTimeDbContextFactory<UtnNotici
     private static IConfigurationRoot BuildConfiguration()
     {
         var builder = new ConfigurationBuilder()
-            .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../UtnNoticias.DbMigrator/"))
+            .SetBasePath(GetDbMigratorProjectPath())
             .AddJsonFile("appsettings.json", optional: false);
 
         return builder.Build();
+    }
+
+    private static string GetDbMigratorProjectPath()
+    {
+        var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
+
+        while (currentDirectory != null)
+        {
+            var srcCandidate = Path.Combine(currentDirectory.FullName, "src", "UtnNoticias.DbMigrator");
+            if (File.Exists(Path.Combine(srcCandidate, "appsettings.json")))
+            {
+                return srcCandidate;
+            }
+
+            var siblingCandidate = Path.Combine(currentDirectory.FullName, "UtnNoticias.DbMigrator");
+            if (File.Exists(Path.Combine(siblingCandidate, "appsettings.json")))
+            {
+                return siblingCandidate;
+            }
+
+            currentDirectory = currentDirectory.Parent;
+        }
+
+        throw new DirectoryNotFoundException("Could not find UtnNoticias.DbMigrator/appsettings.json.");
     }
 }

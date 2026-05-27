@@ -13,6 +13,7 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using UtnNoticias.ReadingLists;
 using UtnNoticias.Themes;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 
@@ -67,6 +68,8 @@ public class UtnNoticiasDbContext :
 	public DbSet<Usuario> Usuarios { get; set; }
 
 	public DbSet<Theme> Themes { get; set; }
+	public DbSet<ReadingList> ReadingLists { get; set; }
+	public DbSet<ReadingListItem> ReadingListItems { get; set; }
 
 	#endregion
 
@@ -106,6 +109,28 @@ public class UtnNoticiasDbContext :
 			b.ToTable(UtnNoticiasConsts.DbTablePrefix + "Themes", UtnNoticiasConsts.DbSchema);
 			b.ConfigureByConvention();
 			b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+		});
+
+		builder.Entity<ReadingList>(b =>
+		{
+			b.ToTable(UtnNoticiasConsts.DbTablePrefix + "ReadingLists", UtnNoticiasConsts.DbSchema);
+			b.ConfigureByConvention();
+			b.Property(x => x.Name).IsRequired().HasMaxLength(ReadingListConsts.MaxNameLength);
+			b.HasIndex(x => new { x.OwnerId, x.Name });
+			b.HasMany(x => x.Items).WithOne().HasForeignKey(x => x.ReadingListId).OnDelete(DeleteBehavior.Cascade);
+		});
+
+		builder.Entity<ReadingListItem>(b =>
+		{
+			b.ToTable(UtnNoticiasConsts.DbTablePrefix + "ReadingListItems", UtnNoticiasConsts.DbSchema);
+			b.ConfigureByConvention();
+			b.Property(x => x.Title).IsRequired().HasMaxLength(ReadingListConsts.MaxTitleLength);
+			b.Property(x => x.Url).IsRequired().HasMaxLength(ReadingListConsts.MaxUrlLength);
+			b.Property(x => x.Author).HasMaxLength(ReadingListConsts.MaxAuthorLength);
+			b.Property(x => x.Description).HasMaxLength(ReadingListConsts.MaxDescriptionLength);
+			b.Property(x => x.UrlToImage).HasMaxLength(ReadingListConsts.MaxImageUrlLength);
+			b.Property(x => x.Content).HasMaxLength(ReadingListConsts.MaxContentLength);
+			b.HasIndex(x => new { x.ReadingListId, x.Url }).IsUnique();
 		});
 	}
 }

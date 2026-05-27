@@ -6,15 +6,35 @@ namespace UtnNoticias.Permissions;
 
 public class UtnNoticiasPermissionDefinitionProvider : PermissionDefinitionProvider
 {
-    public override void Define(IPermissionDefinitionContext context)
-    {
-        var myGroup = context.AddGroup(UtnNoticiasPermissions.GroupName);
-        //Define your own permissions here. Example:
-        //myGroup.AddPermission(UtnNoticiasPermissions.MyPermission1, L("Permission:MyPermission1"));
-    }
+	public override void Define(IPermissionDefinitionContext context)
+	{
+		var group = context.AddGroup(UtnNoticiasPermissions.GroupName);
 
-    private static LocalizableString L(string name)
-    {
-        return LocalizableString.Create<UtnNoticiasResource>(name);
-    }
+		var readingLists = group.AddPermission(
+			UtnNoticiasPermissions.ReadingLists.Default,
+			L("Permission:ReadingLists")
+		);
+
+		readingLists.AddChild(
+			UtnNoticiasPermissions.ReadingLists.Create,
+			L("Permission:ReadingLists.Create")
+		);
+		readingLists.AddChild(
+			UtnNoticiasPermissions.ReadingLists.Update,
+			L("Permission:ReadingLists.Update")
+		);
+		readingLists.AddChild(
+			UtnNoticiasPermissions.ReadingLists.Delete,
+			L("Permission:ReadingLists.Delete")
+		);
+		readingLists.AddChild(
+			UtnNoticiasPermissions.ReadingLists.AddItem,
+			L("Permission:ReadingLists.AddItem")
+		);
+	}
+
+	private static LocalizableString L(string name)
+	{
+		return LocalizableString.Create<UtnNoticiasResource>(name);
+	}
 }

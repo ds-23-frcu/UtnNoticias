@@ -19,7 +19,7 @@ namespace UtnNoticias.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.SqlServer)
-                .HasAnnotation("ProductVersion", "7.0.1")
+                .HasAnnotation("ProductVersion", "7.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -305,6 +305,100 @@ namespace UtnNoticias.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PanelMonitoreos");
+                });
+
+            modelBuilder.Entity("UtnNoticias.ReadingLists.ReadingList", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
+
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId", "Name");
+
+                    b.ToTable("AppReadingLists", (string)null);
+                });
+
+            modelBuilder.Entity("UtnNoticias.ReadingLists.ReadingListItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("AddedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Author")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Content")
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<DateTime?>("PublishedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ReadingListId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<string>("UrlToImage")
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReadingListId", "Url")
+                        .IsUnique();
+
+                    b.ToTable("AppReadingListItems", (string)null);
                 });
 
             modelBuilder.Entity("UtnNoticias.RegistroUsuario", b =>
@@ -2183,6 +2277,15 @@ namespace UtnNoticias.Migrations
                         .HasForeignKey("ListaContenedorId");
                 });
 
+            modelBuilder.Entity("UtnNoticias.ReadingLists.ReadingListItem", b =>
+                {
+                    b.HasOne("UtnNoticias.ReadingLists.ReadingList", null)
+                        .WithMany("Items")
+                        .HasForeignKey("ReadingListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("UtnNoticias.RegistroUsuario", b =>
                 {
                     b.HasOne("UtnNoticias.Usuario", "usuario")
@@ -2354,6 +2457,11 @@ namespace UtnNoticias.Migrations
             modelBuilder.Entity("UtnNoticias.PanelMonitoreo", b =>
                 {
                     b.Navigation("Accesos");
+                });
+
+            modelBuilder.Entity("UtnNoticias.ReadingLists.ReadingList", b =>
+                {
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("UtnNoticias.Themes.Theme", b =>

@@ -2,5 +2,8 @@
 
 public static class UtnNoticiasDomainErrorCodes
 {
-    /* You can add your business exception error codes here, as constants */
+    public const string ReadingListNameIsRequired = "UtnNoticias:ReadingListNameIsRequired";
+    public const string ReadingListItemTitleIsRequired = "UtnNoticias:ReadingListItemTitleIsRequired";
+    public const string ReadingListItemUrlIsRequired = "UtnNoticias:ReadingListItemUrlIsRequired";
+    public const string ReadingListItemAlreadyExists = "UtnNoticias:ReadingListItemAlreadyExists";
 }
